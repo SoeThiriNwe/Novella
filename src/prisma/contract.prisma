@@ -1,0 +1,126 @@
+
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name  String?
+  stories Story[]
+  comments Comment[]
+  votes Vote[]
+  reviews Review[]
+  libraries Library[]
+  readingListNames ReadingListName[]
+}
+
+enum Status {
+  ONGOING 
+  COMPLETED
+}
+
+model Story {
+  id Int @id @default(autoincrement())
+  authorId Int
+  name String
+  coverPhotoUrl String?
+  description String
+  status Status
+  UserRelation User @relation(fields: [authorId], references: [id] , onDelete: Cascade ) 
+  chapters Chapter[]
+  tagStoryRelations TagStoryRelation[]
+  reviews Review[]
+  libraries Library[]
+  storiesInReadingLists StoriesInReadingList[]
+}
+
+model Chapter {
+  id Int @id @default(autoincrement())
+  storyId Int
+  chapterName String
+  isPublished Boolean
+  order Int
+  createdDate DateTime @default(now())
+  StoryRelation Story @relation(fields : [storyId], references : [id] , onDelete: Cascade)
+  paragraphs Paragraph[]
+  votes Vote[]
+}
+
+model Paragraph {
+  id Int @id @default(autoincrement())
+  chapterId Int
+  content String
+  chapterRelation Chapter @relation(fields : [chapterId] , references : [id] , onDelete: Cascade)
+  comments Comment[]
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  commentorId Int
+  paragraphId Int
+  commentText String
+  commentedDate DateTime @default(now())
+  commentorRelation User @relation(fields : [commentorId] , references : [id] , onDelete: Cascade)
+  paragraphRelation Paragraph @relation(fields : [paragraphId] , references : [id] , onDelete: Cascade)
+}
+
+model Vote{
+  id Int @id @default(autoincrement())
+  voterId Int
+  chapterId Int
+  votedTime DateTime @default(now())
+  voterRelation User @relation(fields : [voterId] , references : [id] , onDelete: Cascade)
+  chapterRelation Chapter @relation(fields : [chapterId], references : [id] , onDelete: Cascade)
+}
+
+model Tag{
+  id Int @id @default(autoincrement())
+  tagName String
+  tagStoryRelations TagStoryRelation[]
+}
+
+model TagStoryRelation{
+  id Int @id @default(autoincrement())
+  tagId Int
+  storyId  Int
+  tagRelation Tag @relation(fields : [tagId], references : [id] , onDelete: Cascade)
+  storyRelation Story @relation(fields : [storyId], references :  [id] , onDelete: Cascade)
+}
+
+model Review{
+  id Int @id @default(autoincrement())
+  readerId Int
+  storyId Int
+  reviewText String
+  readerRelation User @relation(fields : [readerId], references : [id] , onDelete:  Cascade)
+  storyRelation Story @relation(fields : [storyId] , references : [id] , onDelete: Cascade)
+}
+
+model Library{
+  id Int @id @default(autoincrement())
+  readerId Int
+  storyId Int
+  isArchived Boolean @default(false)
+  readerRelation User @relation(fields : [readerId], references : [id] , onDelete: Cascade)
+  storyRelation Story @relation(fields : [storyId], references : [id] , onDelete: Cascade)
+}
+
+model ReadingListName{
+  id Int @id @default(autoincrement())
+  name String
+  readerId Int
+  readerRelation User @relation(fields : [readerId], references : [id] , onDelete: Cascade)
+  storiesInReadingLists StoriesInReadingList[]
+}
+
+model StoriesInReadingList{
+  id Int @id @default(autoincrement())
+  readingListNameId Int
+  storyId Int
+  readingListNameRelation ReadingListName @relation(fields : [readingListNameId], references : [id] , onDelete: Cascade)
+  storyRelation Story @relation(fields : [storyId], references : [id] , onDelete: Cascade)
+
+}
+
+
+
+
+
