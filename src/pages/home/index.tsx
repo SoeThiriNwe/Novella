@@ -69,7 +69,7 @@ const homePage = ()=>{
                                             },},
                                             paddingBottom : "3px"
                                     }} >
-                                    {defaultData.map(item => <Box sx={{borderRadius : "9px",overflow :"hidden", width : {xs : "35%" ,  md :  "25%"} , height : "fit-content" , bgcolor : "#e0d7c6" , border : "1px solid #d6cc99ff",flexShrink: 0, paddingBottom : "7px"  }} >
+                                    {defaultData.map(item => <Box key={item.id} sx={{borderRadius : "9px",overflow :"hidden", width : {xs : "35%" ,  md :  "25%"} , height : "fit-content" , bgcolor : "#e0d7c6" , border : "1px solid #d6cc99ff",flexShrink: 0, paddingBottom : "7px"  }} >
                                         <Box sx={{borderRadius : "9px",bgcolor : "red" , width :  "100%" , height : "120px" , overflow : "hidden" , display : "flex", alignItems : "center" , justifyContent :"center" }} >
                                             <Image alt="storyimage" src={item.url} width={100} height={100} style={{width : "100%" , height : "auto" }} />
                                         </Box>
@@ -111,7 +111,7 @@ const homePage = ()=>{
                                             paddingBottom : "1px",
                                             overflow: "auto",
                             }}>
-                                    {recommandedDefault.map(item => <Box sx={{borderRadius : "9px",overflow :"hidden", width : {xs : "25%" ,  md :  "20%"} , height : "fit-content" , bgcolor : "#e0d7c6"  , border : "1px solid #d6cc99ff",flexShrink: 0, paddingBottom : "7px"  }} >
+                                    {recommandedDefault.map(item => <Box key={item.id} sx={{borderRadius : "9px",overflow :"hidden", width : {xs : "25%" ,  md :  "20%"} , height : "fit-content" , bgcolor : "#e0d7c6"  , border : "1px solid #d6cc99ff",flexShrink: 0, paddingBottom : "7px"  }} >
                                         
                                         <Box sx={{borderRadius : "9px",bgcolor : "red" , width :  "100%" , height : "90px" , overflow : "hidden" , display : "flex", alignItems : "center" , justifyContent :"center" }} >
                                             <Image alt="storyimage" src={item.url} width={100} height={100} style={{width : "100%" , height : "auto" }} />
@@ -150,8 +150,13 @@ const homePage = ()=>{
                                         </Box>
                                                             </Box>)}
                     </Box>
-                </Box>       
+                </Box> 
+
+                
         </Box>
+
+
+
     )
 }
 
@@ -160,7 +165,7 @@ export default homePage;
 const defaultData = [
     {
         id : 0,
-        url : "/story (4).jpg",
+        url : "/story (2).jpg",
         name : "The Last Letter",
         author : "Soe Soe",
         totalChapter : 28,
@@ -168,7 +173,7 @@ const defaultData = [
     },
     {
         id : 1,
-        url : "/story (5).jpg",
+        url : "/story (8).jpg",
         name : "Moonlit Promise",
         author : "Soe Soe",
         totalChapter : 28,
@@ -184,7 +189,7 @@ const defaultData = [
     },
     {
         id : 3,
-        url : "/story (7).jpg",
+        url : "/story (1).jpg",
         name : "Pretty Lies",
         author : "Soe Soe",
         totalChapter : 28,
@@ -195,7 +200,7 @@ const recommandedDefault = [
     {
         id : 1,
         name : "His Only Sunshine",
-        url : "/storyForRecommanded (1).jpg",
+        url : "/storyForRecommanded (5).jpg",
         author : "Thiri",
         totalViewer : "1.2M",
         totalLiked : "23.2k"
@@ -203,7 +208,7 @@ const recommandedDefault = [
     {
         id : 2,
         name : "Between Two Door",
-        url : "/storyForRecommanded (2).jpg",
+        url : "/storyForRecommanded (1).jpg",
         author : "Thiri",
         totalViewer : "1.2M",
         totalLiked : "23.2k"
@@ -219,7 +224,7 @@ const recommandedDefault = [
     {
         id : 4,
         name : "The Silence Blossom",
-        url : "/storyForRecommanded (2).jpg",
+        url : "/storyForRecommanded (5).jpg",
         author : "Thiri",
         totalViewer : "1.2M",
         totalLiked : "23.2k"
